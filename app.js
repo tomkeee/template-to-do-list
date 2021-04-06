@@ -4,6 +4,7 @@ const bodyParser= require("body-parser");
 const app=express();
 
 var toDoList=[];
+var toDoWorkList=[];
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended:true}));
@@ -24,12 +25,24 @@ var today = new Date();
     res.render("list",{kindOfDay:day, newToDo:toDoList});
 });
 
-
 app.post("/",function(req,res){
 
     var toDo= req.body.items;
+    
+    if (req.body.list==="workList"){
+        toDoWorkList.push(toDo);
+        res.redirect("/work");
+    } else{
         toDoList.push(toDo);
         res.redirect("/");
+    }
+
+});
+
+app.get("/work",function(req,res)
+{
+    let bookmark="workList";
+    res.render("list",{kindOfDay:bookmark,newToDo:toDoWorkList})
 });
 
 
