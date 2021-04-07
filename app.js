@@ -26,7 +26,7 @@ app.post("/",function(req,res){
 
     const toDo= req.body.items;
     
-    if (req.body.list==="workList"){
+    if (req.body.listing==="workList"){
         toDoWorkList.push(toDo);
         res.redirect("/work");
     } else{
